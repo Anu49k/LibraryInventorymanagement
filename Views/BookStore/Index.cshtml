@@ -1,0 +1,119 @@
+﻿@model IEnumerable<LibraryInventoryManagementSystem.Models.BookDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Book Inventory Management</h2>
+
+
+@using (Html.BeginForm("Index", "BookStore", FormMethod.Get))
+{
+    <div>
+        Enter Title/Author/ISBN to Search @Html.TextBox("search")
+        @*Author @Html.TextBox("AUTHOR")
+            Isbn  @Html.TextBox("ISBN")*@
+
+        <input type="submit" value="SEARCH" />
+
+    </div>
+
+
+    <p>
+        @Html.ActionLink("Add New", "Addnew")
+    </p>
+}
+
+
+
+
+@*<form id="formSearch" method="post">
+
+        <div class="row" id="SearchBox">
+            <div class="col-md-2">Title</div>
+            <div class="col-md-2">
+                <input type="text" id="txttitle" name="Title" />
+            </div>
+            <div class="col-md-1"></div>
+            </div>
+        <div class="row" id="SearchBox">
+            <div class="col-md-2">Author</div>
+            <div class="col-md-2">
+                <input type="text" id="txtauthor" name="Author" />
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row" id="SearchBox">
+            <div class="col-md-2">ISBN</div>
+            <div class="col-md-2">
+                <input type="text" id="txtISBN" name="ISBN" />
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+                <div class="col-md-2"><input type="submit" id="submitsearch" /></div>
+
+    </form>*@
+
+
+<h5>BOOK FIELDS</h5>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3" style="color:red ">
+
+                No Match Found
+                </td>
+            </tr>
+
+    }
+    else
+    {
+   foreach (var item in Model)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publisher)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ISBN }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ISBN }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ISBN })
+                </td>
+            </tr>
+    }
+    }
+
+            </table>
